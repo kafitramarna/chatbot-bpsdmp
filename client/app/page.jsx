@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { App } from "@/components/layouts/App";
-import { getQA } from "./api/QA";
+import { getQA, deleteQA } from "./api/QA";
 
 export default function Home() {
   const [qa, setQA] = useState([]);
@@ -24,6 +24,17 @@ export default function Home() {
     }
     fetchQA();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteQA(id);
+      setQA((prevQA) => prevQA.filter((item) => item.id !== id));
+      alert("Item deleted successfully.");
+    } catch (err) {
+      console.error("Error deleting QA:", err.message);
+      setError("Failed to delete item.");
+    }
+  };
 
   return (
     <App>
@@ -60,6 +71,14 @@ export default function Home() {
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4">{item.pertanyaan}</td>
                   <td className="px-6 py-4">{item.jawaban}</td>
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Hapus
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
