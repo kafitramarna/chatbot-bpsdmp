@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { App } from "@/components/layouts/App";
 import { getQA, deleteQA } from "./api/QA";
+import Link from "next/link";
 
 export default function Home() {
   const [qa, setQA] = useState([]);
@@ -38,9 +39,18 @@ export default function Home() {
 
   return (
     <App>
-      <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-        List QA
-      </h1>
+      <div className="mb-3">
+        <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-slate-900 leading-tight mb-3">
+          List QA
+        </h1>
+
+        <Link
+          href="/create"
+          className="inline-flex items-center justify-center h-10 px-6 font-semibold text-white bg-black rounded-md hover:bg-gray-800 transition duration-200"
+        >
+          Tambah QA
+        </Link>
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (

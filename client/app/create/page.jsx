@@ -20,17 +20,15 @@ export default function Create() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    try{
+    try {
       const response = await createQA(formData);
       console.log("Response:", response);
       alert("Pertanyaan dan jawaban berhasil ditambahkan.");
-    }
-    catch(err){
+    } catch (err) {
       console.error("Error:", err);
       alert("Terjadi kesalahan saat menambahkan pertanyaan dan jawaban.");
-    }
-    finally{
-        window.location.href = "/";
+    } finally {
+      window.location.href = "/";
     }
   };
 
